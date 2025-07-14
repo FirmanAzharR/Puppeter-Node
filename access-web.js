@@ -18,11 +18,18 @@ const logInfo = (message) => {
   console.log(`[INFO] ${new Date().toISOString()} - ${message}`);
 };
 
-// Global setup
+// Global setup edge
+// const browserOptions = {
+//   headless: false,
+//   executablePath:
+//     "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+//   defaultViewport: null,
+//   args: ["--start-fullscreen"],
+// };
+
+//Global setup default 
 const browserOptions = {
   headless: false,
-  executablePath:
-    "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
   defaultViewport: null,
   args: ["--start-fullscreen"],
 };
