@@ -4,13 +4,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "node-cron": "^4.1.0",
-    "puppeteer": "^24.10.1"
+    "node-schedule": "^2.1.1",
+    "puppeteer": "^24.12.1"
   }
 }

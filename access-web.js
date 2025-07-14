@@ -1,10 +1,17 @@
 import puppeteer from "puppeteer";
 import { promises as fs } from "fs";
 
+const url = "http://localhost:5173"; // Base URL for the application
+
 // Delay helper
 const delay = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
+
+const delayMinutes = (minutes) => {
+  return new Promise((resolve) => setTimeout(resolve, minutes * 60 * 1000));
+};
+
 
 // Logger helper
 const logInfo = (message) => {
@@ -28,14 +35,14 @@ const NavigateToPage = async (page, url) => {
 };
 
 const Login = async (page) => {
-  await NavigateToPage(page, "http://localhost:5173/login");
+  await NavigateToPage(page, `${url}/login`);
   await page.waitForSelector('input[placeholder="Enter your username"]');
   await page.type(
     'input[placeholder="Enter your username"]',
     "admin@jogjaprov.go.id"
   );
   await page.waitForSelector('input[placeholder="Enter your password"]');
-  await page.type('input[placeholder="Enter your password"]', "12345678");
+  await page.type('input[placeholder="Enter your password"]', "gedanggoreng");
   await page.click('button[type="submit"]');
   await page.waitForNavigation();
   logInfo("Login success!");
@@ -71,6 +78,7 @@ const AccessVideo = async (page, videoTitle) => {
   // awit util video list ready
   await page.waitForFunction(
     (title) => {
+      //get title from h4 elements
       return Array.from(document.querySelectorAll("h4")).some((h4) =>
         h4.innerText.includes(`${title}`)
       );
@@ -123,14 +131,14 @@ const accessWeb = async () => {
     //End
 
     await Login(page); //login
-    await NavigateToPage(page, "http://localhost:5173/counting"); //navigate counting
+    await NavigateToPage(page, `${url}/counting`); //navigate counting
 
     for (const { buttonLabel, videoTitle } of labels) {
       await AccessButton(page, buttonLabel); //click perbatasan kota
       await AccessButton(page, "Start Counting"); //click start counting
       await AccessVideo(page, videoTitle); //click video condong catur
       await AccessButton(page, "Start Counting Object"); //click start counting object
-      await delay(15000); //time video counting (on ms)
+      await delayMinutes(90); //time video counting (on ms)
       await AccessButton(page, "Stop Counting"); //click stop counting object
       await delay(2000);
       await AccessButton(page, "Kirim Data"); //click kirim data
