@@ -2,7 +2,6 @@ import schedule from 'node-schedule';
 import accessWeb from './access-web.js';
 
 console.log("✅ CCTV Scheduler Service Started");
-accessWeb();
 
 
 // Schedule pertama: 6:25 AM setiap hari
